@@ -1,0 +1,16 @@
+stages:
+  - lint
+  - build
+
+lint:
+  stage: lint
+  image: golangci/golangci-lint
+  script:
+    - golangci-lint run
+
+build:
+  stage: build
+  image: "golang:1.19"
+  script:
+    - go mod download
+    - go build cmd/radarrplexsync.go
