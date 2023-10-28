@@ -13,6 +13,5 @@ require (
 	github.com/google/uuid v1.1.1 // indirect
 	github.com/gorilla/websocket v1.4.0 // indirect
 	github.com/sirupsen/logrus v1.9.3
-	golang.org/x/exp v0.0.0-20231006140011-7918f672742d
 	golift.io/starr v1.0.0
 )
