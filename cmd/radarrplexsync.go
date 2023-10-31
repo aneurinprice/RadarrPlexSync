@@ -4,6 +4,7 @@ import (
 	"os"
 	. "radarrPlexSync/internal"
 	"strings"
+
 	plexFunctions "github.com/jrudio/go-plex-client"
 	log "github.com/sirupsen/logrus"
 	"golift.io/starr"
@@ -33,7 +34,6 @@ func main() {
 	CheckIfError(err)
 
 	for _, movie := range output {
-		log.Debug(movie.Title)
 		if movie.HasFile && (len(movie.MovieFile.Edition) > 0 ) {
 			plex, err := plexFunctions.New(os.Getenv("PlexServerUrl"), os.Getenv("PlexServerKey"))
 			CheckIfError(err)
