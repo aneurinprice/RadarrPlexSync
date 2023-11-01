@@ -8,24 +8,24 @@ This project aims to allow a user to automatically transfer radarr data to plex.
 
 - Set the following environmental variables:
   ```
-  		PlexServerUrl
-		PlexServerKey
-		RadarrServerUrl
-		RadarrServerKey
-        LogLevel #(Optional)
+    PlexServerUrl
+    PlexServerKey
+    RadarrServerUrl
+    RadarrServerKey
+    LogLevel #(Optional)
   ```
 
 - `go run cmd/radarrplexsync.go`
     Depending on your log level, Your output should resemble:
-      ```
-    National Treasure: Collectors Edition
-    Now You See Me: Extended Edition
-    Robin Hood: Special Edition
-    RoboCop: Directors Cut
-    Rock of Ages: Extended Edition
-    Seven Brides for Seven Brothers: Widescreen Edition
-    Short Circuit: Special Edition
-      ```
+    ```
+        National Treasure: Collectors Edition
+        Now You See Me: Extended Edition
+        Robin Hood: Special Edition
+        RoboCop: Directors Cut
+        Rock of Ages: Extended Edition
+        Seven Brides for Seven Brothers: Widescreen Edition
+        Short Circuit: Special Edition
+    ```
 
     Any movie displayed in the above output has been successfully sync'd
 
