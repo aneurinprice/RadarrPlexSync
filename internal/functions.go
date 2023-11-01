@@ -1,7 +1,6 @@
 package internal
 
 import (
-	"fmt"
 	"net/http"
 	"os"
 	"strconv"
@@ -107,6 +106,5 @@ func UpdateEdition(plexMovie plexFunctions.Metadata, movie radarr.Movie, PlexSer
 
 	log.Debug("Query: ", strings.Replace(string(req.URL.RawQuery) ,PlexServerKey,"<REDACTED>", -1))
 	log.Debug(httpResponse.StatusCode)
-	fmt.Println(plexMovie.Title + ": " + movie.MovieFile.Edition)
 	return httpResponse, err
 }

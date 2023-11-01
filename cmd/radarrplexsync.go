@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	. "radarrPlexSync/internal"
 	"strings"
@@ -42,6 +43,8 @@ func main() {
 			CheckIfError(err)
 			_, err = UpdateEdition(plexMovie, *movie, os.Getenv("PlexServerUrl"), os.Getenv("PlexServerKey"))
 			CheckIfError(err)
+			fmt.Println(plexMovie.Title + ": " + movie.MovieFile.Edition)
+
 		}
 	}
 }
