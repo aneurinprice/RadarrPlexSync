@@ -80,7 +80,7 @@ func CheckPlexMatches(results plexFunctions.SearchResults, movie radarr.Movie) (
 		match bool
 		potentialMatch plexFunctions.Metadata
 	)
-	for _, potentialMatch = range results.MediaContainer.MediaContainer.Metadata {
+	for _, potentialMatch = range results.MediaContainer.Metadata {
 		log.Debug("Checking Match: " + potentialMatch.Media[0].Part[0].File + " -> " + movie.MovieFile.RelativePath)
 		match = VerifyPlexMatch(potentialMatch.Media[0].Part[0].File, movie.MovieFile.RelativePath)
 		if (match) {
@@ -104,7 +104,7 @@ func UpdateEdition(plexMovie plexFunctions.Metadata, movie radarr.Movie, PlexSer
 	req.URL.RawQuery = q.Encode()
 	httpResponse, err := client.Do(req)
 
-	log.Debug("Query: ", strings.Replace(string(req.URL.RawQuery) ,PlexServerKey,"<REDACTED>", -1))
+	log.Debug("Query: ", strings.ReplaceAll(string(req.URL.RawQuery) ,PlexServerKey,"<REDACTED>"))
 	log.Debug(httpResponse.StatusCode)
 	return httpResponse, err
 }

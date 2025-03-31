@@ -3,9 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
-	. "radarrPlexSync/internal"
+	radarrPlexSync "radarrPlexSync/internal"
 	"strings"
-
 	plexFunctions "github.com/jrudio/go-plex-client"
 	log "github.com/sirupsen/logrus"
 	"golift.io/starr"
@@ -13,7 +12,7 @@ import (
 )
 
 func main() {
-	CheckEnvVars()
+	radarrPlexSync.CheckEnvVars()
 	
 	LogLevel, exists := os.LookupEnv("LogLevel")
 	if !exists {
@@ -21,7 +20,7 @@ func main() {
 	}
 	log.Warn("Log Level: " + LogLevel)
 	parsedLogLevel, err := log.ParseLevel(LogLevel)
-	CheckIfError(err)
+	radarrPlexSync.CheckIfError(err)
 	log.SetLevel(parsedLogLevel)
 
 	log.Debug("Radarr Server: " + os.Getenv("RadarrServerUrl"))
@@ -32,17 +31,17 @@ func main() {
 	radarrConnectionConnection := starr.New(os.Getenv("RadarrServerKey"), os.Getenv("RadarrServerUrl"), 0)
 	radarr := radarr.New(radarrConnectionConnection)
 	output, err := radarr.GetMovie(0)
-	CheckIfError(err)
+	radarrPlexSync.CheckIfError(err)
 
 	for _, movie := range output {
 		if movie.HasFile && (len(movie.MovieFile.Edition) > 0 ) {
 			plex, err := plexFunctions.New(os.Getenv("PlexServerUrl"), os.Getenv("PlexServerKey"))
-			CheckIfError(err)
-			titleList := GenerateTitleList(movie)
-			plexMovie,err := SearchPlexForMatches(*plex, titleList, *movie)
-			CheckIfError(err)
-			_, err = UpdateEdition(plexMovie, *movie, os.Getenv("PlexServerUrl"), os.Getenv("PlexServerKey"))
-			CheckIfError(err)
+			radarrPlexSync.CheckIfError(err)
+			titleList := radarrPlexSync.GenerateTitleList(movie)
+			plexMovie,err := radarrPlexSync.SearchPlexForMatches(*plex, titleList, *movie)
+			radarrPlexSync.CheckIfError(err)
+			_, err = radarrPlexSync.UpdateEdition(plexMovie, *movie, os.Getenv("PlexServerUrl"), os.Getenv("PlexServerKey"))
+			radarrPlexSync.CheckIfError(err)
 			fmt.Println(plexMovie.Title + ": " + movie.MovieFile.Edition)
 
 		}
